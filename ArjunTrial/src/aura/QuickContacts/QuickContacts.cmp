@@ -1,0 +1,30 @@
+<aura:component controller="ContactListController">
+
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:attribute name="con" type="sObject[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
+    <aura:handler event="c:newEvent" action="{!c.searchObjName}"/>
+    <ul>
+        <aura:iteration items="{!v.contacts}" var="contact">
+            <li>
+                <a href="{! '#/sObject/' + contact.Id + '/view'}">
+                    <p>{!contact.Name}</p>
+                    <p>{!contact.Phone}</p>
+                </a>
+            </li>
+        </aura:iteration>
+    </ul>
+    
+    <ul>
+        <aura:iteration items="{!v.con}" var="contact">
+            <li>
+               
+                    <p>{!contact.Name}</p>
+                   
+               
+            </li>
+        </aura:iteration>
+    </ul>
+
+</aura:component>

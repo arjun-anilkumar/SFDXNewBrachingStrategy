@@ -1,0 +1,10 @@
+<aura:component >
+    
+    <div>
+        <input type="text" class="form-control"
+               placeholder="Search" onkeyup="{!c.searchKeyChange}" id="aaa"/>
+        
+        <lightning:button variant="brand" label="Submit" onclick="{! c.searchObjName }" />
+    </div>
+    
+</aura:component>

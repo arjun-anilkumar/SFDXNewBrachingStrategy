@@ -1,0 +1,137 @@
+<apex:page controller="InterviewClass" showHeader="false" sidebar="false" standardStylesheets="true">
+  
+    <style>
+        
+        .pbSubheader {
+        background-color: #003c6a;
+        font-weight: bold;
+        font-size: 91%;
+        padding: 2px 2px 2px 5px;
+        margin-top: 15px;
+        overflow: hidden;
+        margin-bottom: 2px;
+        }
+        
+        
+        
+        .navbar-nav > li{
+        margin-left:30px;
+        margin-right:30px;
+        }
+        
+        footer {
+        padding: 50px 0;
+        background-color: #f8f8f8;
+        }
+        
+        p.copyright {
+        margin: 15px 0 0;
+        }
+        table {
+        table-layout: fixed;
+        width: 100%;
+        
+        }
+        
+        
+        
+        body {
+        background-image: url("{!URLFOR($Resource.back3)}");
+        
+        }
+    </style>
+    <apex:form >
+        <head>          
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        </head>
+        <body>            
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="#">universal containers><apex:image url="{!$Resource.universalContainersLogo}" width="130" height="50"/></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="navbar-nav" >
+                                <a >  <apex:commandLink value="home   " action="{!redirectohome}"/></a>
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  Resume  " action="{!redirect}"/> 
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  Interviews  " action="{!redirecttointerview}"/>  
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  open positions  " action="{!redirecttoposition}"/> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <div>
+                <br/><br/><br/>
+            </div>
+            
+            <div class="container">
+                
+                <apex:sectionHeader title="interview list of {!elist.First_Name__c} {!elist.Last_Name__c}"/>
+                
+                <apex:pageBlock >
+                    <apex:pageBlockSection showHeader="true" title=" past interviews " columns="1" >
+                        
+                        <apex:pageBlockTable value="{!intlist}" var="q" styleClass="table table-bordered">
+                            
+                            <apex:column headerValue="interviewer" value="{!q.interviewer__r.First_Name__c} {!q.interviewer__r.Last_Name__c} "/>
+                            <apex:column value="{!q.Status__c}"/>
+                            <apex:column value="{!q.date_and_time__c}"/>                            
+                        </apex:pageBlockTable>                        
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                <apex:pageBlock id="block">                   
+                    <apex:pageBlockSection showHeader="true" title=" upcomming interviews" columns="1">
+                         <apex:pageBlockTable value="{!intlistp}" var="q" rendered="{!makevisible}" id="blockw" styleClass="table table-bordered">
+                            <apex:column headerValue="interviewer" value="{!q.interviewer__r.First_Name__c} {!q.interviewer__r.Last_Name__c} "/>
+                            <apex:column value="{!q.Status__c}"/>
+                            <apex:column value="{!q.date_and_time__c}"/>
+                            <apex:column >                            
+                                <apex:commandButton value="request for reschedule" action="{!edit}" reRender="block" styleClass="btn btn-info" >
+                                    <apex:param name="contIdParam" value="{!q.name}" assignTo="{!contIdChosen}"/> 
+                                </apex:commandButton>
+                            </apex:column>
+                            
+                        </apex:pageBlockTable>
+                        
+                        <apex:pageBlockTable value="{!rlist1}" var="q" rendered="{!makevisiblesec}" id="blockq" styleClass="table table-bordered" >
+                            <apex:column headerValue="interviewer" value="{!q.interviewer__r.First_Name__c} {!q.interviewer__r.Last_Name__c} "/>
+                            <apex:column headerValue="status" >
+                                <apex:inputField value="{!q.Status__c}" styleClass="form-control" />
+                            </apex:column>
+                            <apex:column headerValue=" date and time">
+                                <apex:inputField value="{!q.date_and_time__c}"/>
+                            </apex:column>
+                            <apex:column >                               
+                                <apex:commandButton value="update" action="{!updatechange}"/>
+                                <td> <apex:commandButton value="cancel" action="{!redirecttointerview1}"/></td>
+                            </apex:column>
+                            
+                        </apex:pageBlockTable>                                                                   
+                    </apex:pageBlockSection>
+                </apex:pageBlock>                
+            </div>
+            <div>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/>
+            </div>          
+            
+            <footer style="position:absolute; bottom:0; height:100px; width:100%" >
+                <div class="container">
+                    
+                    <p class="copyright text-muted small">Copyright &copy; UNIVERSAL CONTAINERS 2017. All Rights Reserved</p>
+                </div>
+            </footer>
+        </body>
+        
+    </apex:form>           
+</apex:page>

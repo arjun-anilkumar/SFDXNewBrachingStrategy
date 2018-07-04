@@ -1,0 +1,9 @@
+<apex:page controller="Check" >
+ 
+   
+    <apex:repeat value="{!newlist}" var="new">
+        {!new.OwnerId}<br/>
+    </apex:repeat>
+   
+      
+</apex:page>

@@ -1,0 +1,17 @@
+<apex:page controller="accountlistclass" >
+    <apex:repeat value="{!alist}" var="a">
+        <apex:form >
+    <table>
+        <tr>
+            <td>
+                <apex:commandLink value="edit"/>
+                <apex:commandLink value="del"/>
+                
+            </td>
+            
+        </tr>
+        
+    </table>
+     </apex:form>   
+    </apex:repeat>
+</apex:page>

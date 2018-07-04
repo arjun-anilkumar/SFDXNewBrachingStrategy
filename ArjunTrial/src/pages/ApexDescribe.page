@@ -1,0 +1,42 @@
+<apex:page controller="objectLists" >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:SelectList value="{!val}" size="1">
+                    <apex:selectOptions value="{!Name}"></apex:selectOptions>
+                    <apex:actionSupport event="onchange" rerender="myFields"/>
+                </apex:SelectList>
+               <apex:commandButton action="{!callApex}" value="press"/>
+                <apex:outputText value="{!strInOutputText}" label="You have selected:" id="Outputtext"/>      
+            </apex:pageBlockSection>
+           <apex:pageblocksection >
+            
+                      <apex:outputlabel value="Field Names :"/>   
+                      <apex:outputPanel id="myFields">   
+                        <apex:actionRegion >  
+                           <apex:selectList value="{!selectedField}" size="1">
+                                <apex:selectOptions value="{!ObjectFields}"/>
+                            </apex:selectList>
+                        </apex:actionRegion>      
+                     </apex:outputPanel>
+              
+           </apex:pageblocksection> 
+        </apex:pageBlock>
+        
+        
+        
+        
+        <!--<apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:SelectList value="{!valf}" size="1">
+                    <apex:selectOptions value="{!Fields}"></apex:selectOptions>
+                </apex:SelectList>
+                   
+            </apex:pageBlockSection>
+        </apex:pageBlock>!-->
+        
+        
+       
+    </apex:form>
+    
+</apex:page>

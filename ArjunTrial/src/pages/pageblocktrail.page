@@ -1,0 +1,8 @@
+<apex:page controller="datablockclass" >
+    <apex:pageBlock >
+   <apex:pageBlockSection title="Qualification" collapsible="false">
+       {!elist.First_Name__c}
+
+    </apex:pageBlockSection>
+   </apex:pageBlock>     
+</apex:page>

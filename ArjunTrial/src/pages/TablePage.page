@@ -1,0 +1,23 @@
+<apex:page Controller="AdiController" >
+   <!-- <apex:page standardController="Account">-->
+        <apex:form rendered="{! renderingService != 'PDF' }">
+            <apex:pageBlock title="Hello {!$User.FirstName}!">
+               
+            </apex:pageBlock>
+            <apex:pageBlock title="Contacts">
+                <apex:pageBlockTable value="{!mlist}" var="contact">
+                    <apex:column value="{!contact.Name}"/>
+                    <apex:column value="{!contact.Product_Description__c}"/>
+                    <apex:column value="{!contact.Name__c }"/>
+                </apex:pageBlockTable>
+                
+            </apex:pageBlock>
+            <apex:commandButton value="Export To Excel" action="/apex/ExportAsExcelDemo"  />  
+            <apex:commandButton value="Export To pdf" action="/apex/TablePDF"  /> 
+            <apex:commandLink action="{! saveToPdf }" value="Save to PDF">
+            <apex:param assignTo="{! renderedFileName }" value="Contact-List.pdf"/>
+        </apex:commandLink>
+        </apex:form>
+     contentType: <apex:outputText value=" {! renderedContentType }"/><br/>
+    renderingService: <apex:outputText value=" {! renderingService }"/><br/>
+    </apex:page>

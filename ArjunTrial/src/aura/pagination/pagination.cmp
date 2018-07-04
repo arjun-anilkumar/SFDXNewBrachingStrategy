@@ -1,0 +1,36 @@
+<aura:component controller="samplePagerCtrl">
+  
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  
+   <aura:attribute name="Accounts" type="Account[]"/>
+   <aura:attribute name="page" type="integer" description="using for store page Number"/>
+   <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+   <aura:attribute name="total" type="integer" description="total records count store "/>
+  
+ <div class="slds-m-around--medium">
+      <div class="slds-page-header" role="banner">
+         <div class="slds-align--absolute-center">
+            <aura:if isTrue="{!v.page &gt; 1}">
+               <ui:button press="{!c.previousPage}" label="Previous Page"/>
+            </aura:if>
+            <aura:if isTrue="{!v.page &lt; v.pages}">
+               <ui:button aura:id="nextbtn" press="{!c.nextPage}" label="Next Page"/>
+            </aura:if>
+         </div>
+         <p class="slds-page-header__title slds-truncate">{!v.total} Accounts • page {!v.page} / {!v.pages}</p>
+         <ui:inputSelect aura:id="recordSize" label="Display Record Per Page: " change="{!c.onSelectChange}">
+             <ui:inputSelectOption text="5" label="05"/> 
+            <ui:inputSelectOption text="10" label="10" value="true"/>
+            <ui:inputSelectOption text="15" label="15"/>
+            <ui:inputSelectOption text="20" label="20"/>
+         </ui:inputSelect>
+      </div>
+      
+    <ul class="slds-has-dividers--top">
+         <!--iterate account records-->
+         <aura:iteration items="{!v.Accounts}" var="account">
+            <li class="slds-item">{!account.Name}</li>
+         </aura:iteration>
+    </ul>
+ </div>
+</aura:component>

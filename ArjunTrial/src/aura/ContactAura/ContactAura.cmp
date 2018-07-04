@@ -1,0 +1,37 @@
+<aura:component controller="ContactAura" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+   
+    <aura:attribute name="contactRows" type="sObject[]"/>
+    <aura:attribute name="objectName" type="string"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="myTestClass1">
+        <p class="myTestClass1">
+        	<b> List of Contacts </b>
+        </p>
+        
+        <div class="myTestClass2">
+        <ui:inputSelect multiple="false">
+    <ui:inputSelectOption text="All Primary" label="All Contacts" value="true"/>
+    <ui:inputSelectOption text="All Primary" label="All Primary"/>
+    <ui:inputSelectOption text="All Secondary" label="All Secondary"/>
+</ui:inputSelect>
+            	<ui:button label="Fetch"/>
+
+            </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr >
+                    <th><strong> Id </strong></th>
+                    <th> <strong>  Name </strong> </th>
+                </tr>
+            </thead>
+            <tbody >
+                <aura:iteration var="cell" items="{!v.contactRows}">
+                    <tr>
+                        <td> <a href="{! '/'+cell.Id}"> {!cell.Id} </a> </td>
+                        <td> {!cell.Name}  </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+ 	</div>
+</aura:component>

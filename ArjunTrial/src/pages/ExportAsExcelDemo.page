@@ -1,0 +1,13 @@
+<apex:page Controller="AdiController" contentType="application/vnd.ms-excel#Demo.xls">
+    <apex:pageBlock title="Hello {!$User.FirstName}!">
+        
+   </apex:pageBlock>
+            <apex:pageBlock title="Contacts">
+                <apex:pageBlockTable value="{!mlist}" var="contact">
+                    <apex:column value="{!contact.Name}"/>
+                    <apex:column value="{!contact.Product_Description__c}"/>
+                    <apex:column value="{!contact.Name__c }"/>
+                </apex:pageBlockTable>
+                
+            </apex:pageBlock>
+</apex:page>

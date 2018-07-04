@@ -1,0 +1,14 @@
+<apex:page controller="RegularEx" >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageblocksection >
+              <!-- <apex:inputText value="{!input}" id="username" html-placeholder="Username"/>!-->
+               <!-- <apex:outputField value="{!outputvalue}"/>!-->
+                <br/>
+                <apex:commandButton value="check"/>
+            
+                
+            </apex:pageblocksection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

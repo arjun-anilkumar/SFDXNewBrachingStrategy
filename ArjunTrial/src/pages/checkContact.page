@@ -1,0 +1,46 @@
+<apex:page controller="ContactClass">
+    <style>
+        table {
+    border-collapse: collapse;
+	}
+        th, td {
+    padding: 15px;
+    text-align: left;
+	}
+        tr:hover {background-color: #E5E8E8 }
+    
+    </style>
+    
+    
+    <apex:pageBlock >
+        <apex:form >
+      
+       <table cellpadding="2" border="1" >
+           
+         
+           <tr >
+               <th>slno</th>
+               <th>First name</th>
+               <th>last name</th>
+               <th>phone</th>
+               <th>  </th>
+           
+           </tr>
+           <apex:variable var="index" value="{!0}" />
+            <apex:repeat value="{!clist}" var="c">
+                <apex:variable var="index" value="{!index+1}" />
+           <tr>
+               
+               <td> {!index}</td>
+           	   <td><apex:inputText value="{!c.FirstName}" /> </td>
+               <td><apex:inputText value="{!c.LastName}" /></td>
+               <td><apex:inputText value="{!c.Phone}" /></td>
+               <td> <apex:commandButton action="{!updatelist}" value="save "/></td>
+               
+           </tr> 
+           </apex:repeat>
+         </table> 
+      <apex:commandButton action="{!updatelist}" value="save update" onclick="if(!confirm('Are you sure?')){return false};"/>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

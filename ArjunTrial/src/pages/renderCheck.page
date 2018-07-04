@@ -1,0 +1,28 @@
+<apex:page controller="renderClass" >
+    <apex:stylesheet value="{!URLFOR($Resource.bootstrap_css)}"/>
+    <apex:form >
+    <div class="container">
+        <div class="form-control">
+            <p class="text-center" >
+               
+                   sample render
+                   
+            </p>
+        </div>
+        <div>
+           <apex:commandButton value="select"/>
+            
+        
+            <apex:commandButton value="update"/>
+        </div>
+        <div class="form-control">
+            <!--apex:repeat value="{!newp}" var="asd">
+            <apex:inputField value="{!asd.Name}"/> 
+            </apex:repeat--> 
+            
+        </div>
+        
+    </div>
+   </apex:form>     
+
+</apex:page>

@@ -1,0 +1,115 @@
+<apex:page controller="positionClass" showHeader="false" sidebar="false"  >
+ 
+    <style>
+        
+        .pbSubheader {
+        background-color: #003c6a;
+        font-weight: bold;
+        font-size: 91%;
+        padding: 2px 2px 2px 5px;
+        margin-top: 15px;
+        overflow: hidden;
+        margin-bottom: 2px;
+        }
+        footer {
+        padding: 50px 0;
+        background-color: #f8f8f8;
+        }
+        
+        p.copyright {
+        margin: 15px 0 0;
+        }
+        
+        body {
+        background-image: url("{!URLFOR($Resource.back3)}");
+        
+        }
+        .ac {
+        color: #007bff;
+        text-decoration: none;
+        background-color: transparent;
+        font-family: cursive;
+        -webkit-text-decoration-skip: objects;
+        }
+    </style>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    </head>    
+    <apex:form >
+        <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="#">universal containers><apex:image url="{!$Resource.universalContainersLogo}" width="130" height="50"/></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="navbar-nav" >
+                                <a >  <apex:commandLink value="home   " action="{!redirectohome}"/></a>
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  Resume  " action="{!redirect}"/> 
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  Interviews  " action="{!redirecttointerview}"/>  
+                            </li>
+                            <li class="navbar-nav">
+                                <apex:commandLink value="  open positions  " action="{!redirecttoposition}"/> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+            <div class = "container">
+                <div>
+                    <br/>
+                    <br/>
+                    <br/>     
+                </div>
+                
+                <apex:outputPanel id="ree">
+                    <apex:pageBlock id="block"  >                       
+                        <apex:pageBlockSection showHeader="true" title="open positions" columns="1">
+                            <apex:outputPanel >                               
+                                <apex:pageBlockTable value="{!positionList}" var="p" headerClass="open positions"  columnsWidth="40px,20px,20px,40px"  >
+                                    <apex:column >
+                                        <a > <apex:commandLink value="apply" action="{!applyjob}"  immediate="true" styleClass="ac">
+                                            <apex:param name="contIdParam" value="{!p.id}" assignTo="{!contIdChosen}"/>
+                                            </apex:commandLink></a>
+                                    </apex:column>
+                                    <apex:column value="{!p.name}"/>
+                                    <apex:column value="{!p.Open_Date__c}" />
+                                    <apex:column value="{!p.Functional_Area__c}"/>
+                                    <apex:column value="{!p.Job_Description__c}"/>                                    
+                                </apex:pageBlockTable>                                 
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>                        
+                    </apex:pageBlock>
+                </apex:outputPanel>                
+                <apex:pageBlock >
+                    <apex:pageBlockSection title="applied jobs" columns="1">
+                        <apex:pageBlockTable value="{!newJobApplicationList}" var="jq">
+                            <apex:column value="{!jq.Position__r.Name}"/>
+                            <apex:column value="{!jq.Status__c}"/>
+                            <apex:column value="{!jq.CreatedDate}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSection>                   
+                </apex:pageBlock>
+                <apex:pageBlock ></apex:pageBlock>                          
+            </div>
+            <div>
+                <br/><br/><br/>
+            </div>          
+            <footer style="position:relative; bottom:0; height:100px; width:100%">
+                <div class="container" >
+                    
+                    <p class="copyright text-muted small">Copyright &copy; UNIVERSAL CONTAINERS 2017. All Rights Reserved</p>
+                </div>
+            </footer>
+        </body>
+        
+    </apex:form>
+    
+    
+</apex:page>

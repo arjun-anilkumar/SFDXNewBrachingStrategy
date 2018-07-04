@@ -1,0 +1,6 @@
+<design:component >
+    
+    
+<design:attribute name="objectName" datasource="value1,value2,value3" />
+	
+</design:component>

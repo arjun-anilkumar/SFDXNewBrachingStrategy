@@ -1,0 +1,79 @@
+<apex:page controller="AdiController">
+    <head>
+        
+        <apex:includescript value="//code.jquery.com/jquery-1.11.1.min.js" / >
+            
+            <apex:includescript value="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" />
+            
+            <apex:stylesheet value="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+        </head> 
+        <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
+        
+        $('#myTable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ]
+        } );
+        
+        </script>
+        
+        
+        <table id="table_id" class="display">
+            
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Languages</th>
+                    <th>Population</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!mlist}" var="m">
+                    <tr>
+                        <td>{!m.Name}</td>
+                        <td>{!m.Name__c }</td>
+                        <td>{!m.Product_Description__c}</td>
+                    </tr>
+                </apex:repeat>
+                
+            </tbody>
+        </table>
+        
+          <table id="table_id1" class="display">
+            
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Languages</th>
+                    <th>Population</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!mlist}" var="m">
+                    <tr>
+                        <td>{!m.Name}</td>
+                        <td>{!m.Name__c }</td>
+                        <td>{!m.Product_Description__c}</td>
+                    </tr>
+                </apex:repeat>
+                
+            </tbody>
+        </table>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </apex:page>

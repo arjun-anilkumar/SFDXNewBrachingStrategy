@@ -1,0 +1,122 @@
+<apex:page controller="getClass" sidebar="false" showHeader="false">
+    <!--<apex:stylesheet value="{!URLFOR($Resource.bootstrap_css)}"/> -->
+    <style>
+        
+        .intro-header {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        text-align: center;
+        color: #f8f8f8;
+        background: url(../img/intro-bg.jpg) no-repeat center center;
+        background-size: cover;
+        }
+        .intro-message {
+        position: relative;
+        padding-top: 20%;
+        padding-bottom: 20%;
+        }
+        
+        .intro-message>h1 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+        font-size: 5em;
+        }
+        
+        .intro-divider {
+        width: 400px;
+        border-top: 1px solid #f8f8f8;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        .intro-message>h3 {
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-nav > li{
+        margin-left:30px;
+        margin-right:30px;
+        }
+        
+        footer {
+        padding: 50px 0;
+        background-color: #f8f8f8;
+        }
+        
+        p.copyright {
+        margin: 15px 0 0;
+        }
+        body {
+        background-image: url("{!URLFOR($Resource.back3)}");
+        
+        }
+        
+    </style>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
+    <apex:form >
+        <body>   
+            <div>                
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">universal containers><apex:image url="{!$Resource.universalContainersLogo}" width="130" height="50"/></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="navbar-nav" >
+                                    <a >  <apex:commandLink value="home   " action="{!redirect}"/></a>
+                                </li>
+                                <li class="navbar-nav">
+                                    <apex:commandLink value="  Resume  " action="{!redirect}"/> 
+                                </li>
+                                <li class="navbar-nav">
+                                    <apex:commandLink value="  Interviews  " action="{!redirecttointerview}"/>  
+                                </li>
+                                <li class="navbar-nav">
+                                    <apex:commandLink value="  open positions  " action="{!redirecttoposition}"/> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="container">                    
+                    <div >                                               
+                        <div class="container">
+                            <div class="intro-message">
+                                <h1>welcome  <apex:image url="{!imageURL}" height="200px" width="250px"/></h1>
+                                <h3>{!EmployeeList.First_Name__c} {!EmployeeList.Last_Name__c}     </h3>
+                                <hr class="intro-divider">
+                                <ul class="list-inline intro-social-buttons">
+                                    <li class="list-inline-item">
+                                        <a href="#" class="btn btn-secondary btn-lg">
+                                            <i class="fa fa-twitter fa-fw"></i>
+                                            <span class="network-name">Twitter</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="btn btn-secondary btn-lg">
+                                            <i class="fa fa-github fa-fw"></i>
+                                            <span class="network-name">Github</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="btn btn-secondary btn-lg">
+                                            <i class="fa fa-linkedin fa-fw"></i>
+                                            <span class="network-name">Linkedin</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>          
+            <footer  style="position:absolute; bottom:0; height:100px; width:100%" id="fo">
+                <div class="container">
+                     <p class="copyright text-muted small">Copyright &copy; UNIVERSAL CONTAINERS 2017. All Rights Reserved</p>
+                </div>
+            </footer >
+        </body>
+    </apex:form>
+</apex:page>

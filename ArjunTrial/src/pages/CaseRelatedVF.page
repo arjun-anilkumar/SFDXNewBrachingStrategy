@@ -1,0 +1,17 @@
+<apex:page standardcontroller="case" extensions="CaseRelatedEx">
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection >    
+            <apex:pageBlockTable value="{!email}" var="jq" columns="1">
+                <apex:column value="{!jq.Subject}"/>
+                <apex:column ><apex:outputLink value="/{!jq.id}" target="_parent">{!jq.id}</apex:outputLink></apex:column>
+                <apex:column title="from" value="{!jq.FromName}"/>
+                <apex:column title="to" value="{!jq.ToAddress}"/>
+                <apex:column title="date" value="{!jq.MessageDate}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    
+    
+</apex:page>

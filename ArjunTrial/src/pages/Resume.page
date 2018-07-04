@@ -1,0 +1,523 @@
+<apex:page controller="pdata" sidebar="false" showHeader="false" >
+    
+    
+        
+       
+   
+   
+    <script language="javascript">
+	function printdiv1(printpage)
+	{
+         var navi = document.getElementById("navid");
+        navi.style.display = 'none';
+         
+         
+        alert("confirm print?");
+		var headstr = "<html><head><title></title></head><body>";
+		var footstr = "</body>";
+		var newstr = document.all.item(printpage).innerHTML;
+        console.log('newstr@@',newstr);
+		var oldstr = document.body.innerHTML;
+        //	document.body.innerHTML = newstr;
+        // document.body.innerHTML = oldstr;
+		window.print(newstr);
+         navi.style.display='block';
+       
+		
+		return false;
+	}
+   
+    function printdiv2(printpage)
+	{
+		var headstr = "<html><head><title></title></head><body>";
+		var footstr = "</body>";
+		var newstr = document.all.item(printpage).innerHTML;
+		var oldstr = document.body.innerHTML;
+		document.body.innerHTML = headstr+newstr+footstr;
+		window.print();
+		document.body.innerHTML = oldstr;
+		return false;
+	}
+    
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+    
+      function printpage() {
+        var navi = document.getElementById("navid");
+        var foot = document.getElementById("fo");
+        
+        var printBtn = document.getElementsByClassName("pt");
+        navi.style.display = 'none';
+        foot.style.display='none';
+        printBtn[0].style.display='none';
+        window.print();
+        navi.style.display='block';
+        foot.style.display='block';
+        printbtn[0].style.display='block';
+        
+    }
+    
+    function  addeducation()
+    {
+      $("#addeducation").modal()  
+    }
+    
+	</script>
+    <style>
+          .ac {
+    color: #343a40;
+    text-decoration: none;
+    background-color: transparent;
+    font-family: cursive;
+    -webkit-text-decoration-skip: objects;
+        white-space: pre-wrap;
+        font-weight: bolder;
+}
+        
+        table {
+    border-collapse: collapse;
+	}
+        th, td {
+    padding: 15px;
+    text-align: left;
+	}
+        .out{
+         outline: 2px solid black;
+    outline-offset: 5px;
+        }
+        
+        .navbar-nav > li{
+  margin-left:30px;
+  margin-right:30px;
+}
+    
+    footer {
+  padding: 50px 0;
+  background-color: #f8f8f8;
+}
+
+p.copyright {
+  margin: 15px 0 0;
+}
+   
+          .pbSubheader {
+    background-color: #003c6a;
+    font-weight: bold;
+    font-size: 91%;
+    padding: 2px 2px 2px 5px;
+    margin-top: 15px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+    .bg-light {
+    background-color: aliceblue;
+}
+        body {
+        background-image: url("{!URLFOR($Resource.back3)}");
+
+    }
+    
+    </style>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <script src="https://use.fontawesome.com/658cda2a89.js"></script>
+    </head>
+       
+          
+     <!--apex:repeat value="{!elist}" var="e"-->
+     
+    
+         <body>
+             
+             <apex:form >
+                 
+                 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navid">
+      <div class="container">
+        <a class="navbar-brand" href="#">universal containers><apex:image url="{!$Resource.universalContainersLogo}" width="130" height="50"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="navbar-nav" >
+              <a >  <apex:commandLink value="home   " action="{!redirectohome}"/></a>
+            </li>
+            <li class="navbar-nav">
+                <apex:commandLink value="  Resume  " action="{!redirect1}"/> 
+            </li>
+            <li class="navbar-nav">
+                <apex:commandLink value="  Interviews  " action="{!redirecttointerview}"/>  
+            </li>
+              <li class="navbar-nav">
+               <apex:commandLink value="  open positions  " action="{!redirecttoposition}"/> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+             
+             </apex:form>
+             
+        
+        <div>
+            <br/>
+            <br/>
+            <br/>
+             </div>
+        
+     <!--<apex:stylesheet value="{!URLFOR($Resource.bootstrap_css)}"/>-->    
+     <apex:form id="frm" >
+         
+   		 <div class="container" id="pri">
+        
+         		<div class="row">
+             	<div  class="col-sm-8">
+    			<apex:sectionHeader title="{!elist.First_Name__c} {!elist.Last_Name__c}"  /> 
+                          
+     			<!--/apex:repeat-->
+       			 </div> 
+        		 <div class="col-sm-4">
+                 <apex:image url="{!imageURL}" height="110px" width="125px"/> 
+       			 </div>   
+            	</div>
+        
+            <br/>    
+  	    	<!--div class="out">
+            	<section>
+            
+                	<h3>
+                    personal details<br/>
+            
+          
+               		 </h3>
+          
+            	</section>
+       		 </div-->
+             <apex:pageBlock >
+                 <!--apex:pageBlockButtons >
+             		<apex:commandButton action="{!changeEditableper}" id="editButton" value="Edit" rendered="{!isEditable}"/>
+         			<apex:commandButton action="{!changeEditableper}" id="saveButton" value="Save" rendered="{!isEditable}"/>
+   					 <apex:commandButton onclick="resetInlineEdit()" id="cancelButton" value="Cancel" rendered="{!isEditable}"/>
+    				 <apex:commandButton action="{!updatechange}" value="update change" rendered="{!isEditable}"/>              
+			</apex:pageBlockButtons-->
+            	
+                 <apex:pageBlockSection showHeader="true" title="PERSONAL DETAILS ">
+                        <apex:outputField value="{!elist.Email__c}" rendered="{!isEditableper }" >
+                            <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+        						 			   hideOnEdit="editButton" event="ondblclick"
+          									  changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+                   		 </apex:outputField>
+                        <apex:inputField value="{!elist.Email__c}" rendered="{!isNotEditableper }"/>
+                            
+                         <apex:outputField value="{!elist.Phone__c}" rendered="{!isEditableper }">
+                             <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+           									 hideOnEdit="editButton" event="ondblclick"
+           									 changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+                   		 </apex:outputField>
+                			<apex:inputField value="{!elist.Phone__c}" rendered="{!isNotEditableper }"/>
+                                            
+                      <apex:outputField value="{!elist.City__c}" rendered="{!isEditableper }">
+                            <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+           							 hideOnEdit="editButton" event="ondblclick"
+           							 changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+              	      </apex:outputField>
+                		<apex:inputField value="{!elist.City__c}" rendered="{!isNotEditableper }"/>
+                     
+                     <apex:outputField value="{!elist.State_Province__c}" rendered="{!isEditableper }">
+                            <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+           							 hideOnEdit="editButton" event="ondblclick"
+           							 changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+              	      </apex:outputField>
+                		<apex:inputField value="{!elist.State_Province__c}" rendered="{!isNotEditableper }"/>
+                     
+                     <apex:outputField value="{!elist.Zip_Postal_Code__c}" rendered="{!isEditableper }">
+                            <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+           							 hideOnEdit="editButton" event="ondblclick"
+           							 changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+              	      </apex:outputField>
+                		<apex:inputField value="{!elist.Zip_Postal_Code__c}" rendered="{!isNotEditableper }"/>
+                     <apex:outputField value="{!elist.Street__c}" rendered="{!isEditableper }">
+                            <apex:inlineEditSupport showOnEdit="saveButton, cancelButton"
+           							 hideOnEdit="editButton" event="ondblclick"
+           							 changedStyleClass="myBoldClass" resetFunction="resetInlineEdit"/>
+    
+              	      </apex:outputField>
+                		<apex:inputField value="{!elist.Street__c}" rendered="{!isNotEditableper }"/>
+                     
+                     
+                 </apex:pageBlockSection>
+            
+              <apex:commandButton action="{!updatechange}" id="saveButton" value="Save" style="display:none;" />
+    			<apex:commandButton onclick="resetInlineEdit()" id="cancelButton" value="Cancel" style="display:none;" />
+     		<apex:commandButton action="{!updatechange}" value="update change" style="display:none;"/> 
+    
+             </apex:pageBlock>
+                        
+        	<!--div>
+               
+            	<section id="se">
+                    
+                    <br/>Email :  <apex:outputField value="{!elist.Email__c}" rendered="{!isEditableper }" >
+                     
+                    </apex:outputField>
+
+                
+
+                	<apex:inputField value="{!elist.Email__c}" rendered="{!isNotEditableper }"/>
+                	<br/>Phone :  <apex:outputField value="{!elist.Phone__c}" rendered="{!isEditableper }"/>
+                	<apex:inputField value="{!elist.Phone__c}" rendered="{!isNotEditableper }"/>
+               		 <!--apex:actionSupport event="ondblclick" action="{!changeEditableper}"
+                      rerender="frm" /-->
+                	<!--br/>Years of Experience :  <apex:outputField value="{!elist.Years_of_Experience__c}" rendered="{!isEditableper }"/>
+                	<apex:inputField value="{!elist.Years_of_Experience__c}" rendered="{!isNotEditableper }"/>
+                   
+                    
+                	<br/>
+               		 <apex:commandButton action="{!changeEditableper}" value="edit" rendered="{!isEditable}" />
+          			<apex:commandButton action="{!changeEditableper}" value="done" rendered="{!isEditable}"/>
+                 	<apex:commandButton action="{!updatechange}" value="update change" rendered="{!isEditable}"/>
+          		
+        		</section>
+            <br/>
+
+        	</div-->
+               
+            <div class="out">
+                <section>
+                <h3 ><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    QUALIFICATION<br/>
+                </h3>
+                </section>
+                
+            </div>
+            <div>
+                
+                <br/>
+                
+                <table cellpadding="2" border="1">
+                    <tr>
+                        <th>slno</th>
+                    <th> name</th>
+                        <th>university</th>
+                        <th>year of passout</th>
+                    </tr>
+                     <apex:variable var="index" value="{!0}" />
+                    <apex:repeat value="{!qlist}" var="q">
+                         <apex:variable var="index" value="{!index+1}" />
+                    <tr>
+                        
+                     <td> {!index}</td>
+                        <td> <apex:outputLabel value="{!q.Name}" rendered="{!isEditableq }"/>
+                            <apex:inputField value="{!q.Name}" rendered="{!isNotEditableq }"/>
+                        </td>
+                        <td><apex:outputLabel value="{!q.university__c}" rendered="{!isEditableq }"/>
+                            <apex:inputField value="{!q.university__c}" rendered="{!isNotEditableq }"/>
+                          
+                        </td>
+                        <td><apex:outputLabel value="{!q.year_of_passout__c}" rendered="{!isEditableq }"/>
+                            <apex:inputField value="{!q.year_of_passout__c}" rendered="{!isNotEditableq }"/>
+                        </td>
+                        
+                                                
+                    </tr>
+                      
+                    </apex:repeat>
+                    
+                    
+                </table>
+                
+               
+                
+                <apex:outputPanel rendered="{!add}">
+                    <!-- Name   : <apex:inputField label="Name" value="{!qu.Name}"/>    
+                    <br/> University:<apex:inputField label="University" value="{!qu.university__c}"/>
+                    Year of passout<apex:inputField label="year of passout" value="{!qu.year_of_passout__c}"/>-->
+                    
+                   
+                
+
+                <table style="none">
+                    <tr>
+                     <td>Name</td>
+                        <td><apex:inputField label="University" value="{!qu.Name}"/>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>university</td>
+                        <td><apex:inputField label="University" value="{!qu.university__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td>year of passout</td>
+                        <td><apex:inputField value="{!qu.year_of_passout__c}"/></td>
+                        <td> <apex:commandButton value="save" action="{!addnew}"/></td>
+                         <td> <apex:commandButton value="cancel" action="{!redirect}"/></td>
+                    </tr>
+                </table>
+                                </apex:outputPanel>
+              
+                <apex:commandLink action="{!changeEditableq}" value="edit " rendered="{!isEditable}" styleClass="ac" />
+          		<apex:commandLink action="{!changeEditableq}" value=" done " rendered="{!isEditable}" styleClass="ac"/>
+                 <apex:commandLink action="{!updatechange}" value=" update change " rendered="{!isEditable}" styleClass="ac"/>
+                <apex:commandLink action="{!addq}" value=" add more " rendered="{!isEditable}" styleClass="ac"/>
+                
+        </div>
+                
+                <br/>
+                <div class="out">
+                    <h3><i class="fa fa-black-tie" aria-hidden="true"></i>
+                    EXPERIENCE<br/>    
+                    </h3>
+                    
+                </div>
+              <div>
+                  
+         
+       
+                <br/>
+                <table cellpadding="2" border="1">
+                   <tr>
+                       <th>slno</th>
+                    <th>name</th>
+                    <th>years of experience</th>
+                     <th>company</th>  
+					</tr> 
+                    
+                    
+                  <apex:variable var="index" value="{!0}" />
+                  <apex:repeat value="{!xlist}" var="x">
+                       <apex:variable var="index" value="{!index+1}" />
+                  <tr>
+                       <td> {!index}</td>
+                      <td><apex:outputLabel value="{!x.Name}" rendered="{!isEditables }" />
+                      <apex:inputField value="{!x.Name}" rendered="{!isNotEditables }"/>
+                      </td>
+                      <td><apex:outputLabel value="{!x.years_of_experience__c}" rendered="{!isEditables }"/>
+                      <apex:inputField value="{!x.years_of_experience__c}" rendered="{!isNotEditables }"/>
+                      </td> 
+                      <td><apex:outputLabel value="{!x.company__c}" rendered="{!isEditables }"/>
+                      <apex:inputField value="{!x.company__c}" rendered="{!isNotEditables }"/>
+                      </td> 
+                      </tr>
+                    </apex:repeat>
+                    
+                          
+                </table>
+                 <apex:outputPanel rendered="{!adde}">
+                    <!-- Name   : <apex:inputField label="Name" value="{!qu.Name}"/>    
+                    <br/> University:<apex:inputField label="University" value="{!qu.university__c}"/>
+                    Year of passout<apex:inputField label="year of passout" value="{!qu.year_of_passout__c}"/>-->
+                    
+                   
+                
+
+                <table style="none">
+                    <tr>
+                     <td>name</td>
+                        <td><apex:inputField label="University" value="{!exq.Name}"/>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>years of experience</td>
+                        <td><apex:inputField label="University" value="{!exq.years_of_experience__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td>company</td>
+                        <td><apex:inputField value="{!exq.company__c}"/></td>
+                        <td> <apex:commandButton value="save" action="{!addnewex}"/></td>
+                         <td> <apex:commandButton value="cancel" action="{!redirect}"/></td>
+                    </tr>
+                </table>
+                                </apex:outputPanel>
+                
+                <apex:commandLink action="{!changeEditables}" value="edit " rendered="{!isEditable}" styleClass="ac" />
+          		<apex:commandLink action="{!changeEditables}" value=" done " rendered="{!isEditable}" styleClass="ac"/>
+                <apex:commandLink action="{!updatechangeEx}" value=" update change " rendered="{!isEditable}" styleClass="ac"/>
+                  <apex:commandLink action="{!addqe}" value=" add more " rendered="{!isEditable}" styleClass="ac"/>
+                  </div>   
+                
+        <br/> 
+      <!--  <div class="out">
+                    
+                    <h3 >
+                        CONTACT DETAILS<br/>
+                    </h3>
+                </div>-->
+          <!-- <div>
+                    
+                
+                    <br/>
+                    city:<apex:outputField value="{!elist.City__c}" rendered="{!isEditablec }"/>
+                    <apex:inputField value="{!elist.City__c}" rendered="{!isNotEditablec }"/>
+                    <br/>state:<apex:outputField value="{!elist.State_Province__c}" rendered="{!isEditablec }"/>
+                    <apex:inputField value="{!elist.State_Province__c}" rendered="{!isNotEditablec }"/>
+                   <br/> postal code:<apex:outputField value="{!elist.Zip_Postal_Code__c}" rendered="{!isEditablec }"/>
+                    <apex:inputField value="{!elist.Zip_Postal_Code__c}" rendered="{!isNotEditablec }"/>
+                   <br/> street:<apex:outputField value="{!elist.Street__c}" rendered="{!isEditablec }"/>
+                    <apex:inputField value="{!elist.Street__c}" rendered="{!isNotEditablec }"/>
+                </div>
+               
+                <apex:commandButton action="{!changeEditablec}" value="edit" rendered="{!isEditable}" />
+          		<apex:commandButton action="{!changeEditablec}" value="done" rendered="{!isEditable}"/>
+                <apex:commandButton action="{!updatechange}" value="update change" rendered="{!isEditable}"/>
+                <br/> -->
+                
+            </div>
+             
+        
+        
+        
+         
+                    
+                <div class="container">
+                    <div class="out">
+                    <h3><i class="fa fa-shield"></i> 
+                    DECLARATION<br/>   
+                       
+                    </h3>
+                    
+                </div>
+                    <br/>
+                     <p >
+                         <b>I declare all the informations listed above are true.</b>
+                        </p>
+                        </div>
+    
+         <div class="container">
+             
+         	<div class="out">
+                <apex:commandButton action="{!changeEditable}" value="print preview" rendered="{!isEditable}"/> 
+                     <apex:commandButton action="{!changeEditableBak}" value="Back" rendered="{!isEditableB}"/>
+                <apex:commandButton onclick="printdiv1('pri')" value="print" id="pt"/>
+                    
+                 <apex:commandButton action="{!changeEditableper}" id="editButton" value="Edit" rendered="{!isEditable}"/>
+    <apex:commandButton action="{!changeEditableper}" id="saveButton" value="Save" style="display:none;" />
+    <apex:commandButton onclick="resetInlineEdit()" id="cancelButton" value="Cancel" style="display:none;" />
+     <apex:commandButton action="{!updatechange}" value="update change" style="display:none;"/> 
+         	</div>
+         </div>
+         </apex:form>
+    <!--apex:commandButton action="{!changeEditable}" value="edit"/-->
+             
+             <footer style="position:relative; bottom:0; height:100px; width:100%" id="fo">
+      <div class="container">
+      
+        <p class="copyright text-muted small">Copyright &copy; UNIVERSAL CONTAINERS 2017. All Rights Reserved</p>
+      </div>
+    </footer>
+  </body>        
+</apex:page>

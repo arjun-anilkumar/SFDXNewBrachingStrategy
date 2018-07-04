@@ -1,0 +1,7 @@
+<apex:component controller="pdata" >
+   <apex:pageBlockSection title="Qualification" collapsible="false">
+    <apex:pageBlockTable value="{!qlist}" var="q">
+    <apex:column value="{!q.Name}"/>
+    </apex:pageBlockTable>
+    </apex:pageBlockSection>
+</apex:component>
